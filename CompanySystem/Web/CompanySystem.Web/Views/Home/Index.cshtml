@@ -1,0 +1,50 @@
+﻿
+@{
+    ViewBag.Title = "Welcome";
+}
+<style>
+    table, tr, td, th {
+        border: 1px solid #ccc;
+        padding: 10px;
+        margin: 10px;
+    }
+</style>
+
+<h2>Employees:</h2>
+<body data-ng-app="APIModule">
+    <div id="tblEmployees" ng-controller="APIController">
+        <table>
+            <tr>
+                <th>ID</th>
+                <th>First Name</th>
+                <th>Last Name</th>
+                <th>Age</th>
+                <th>Email</th>
+                <th></th>
+            </tr>
+            <tbody data-ng-repeat="emp in employees">
+                <tr>
+                    <td>{{emp.Id}}</td>
+                    <td>{{emp.FirstName}}</td>
+                    <td>{{emp.LastName}}</td>
+                    <td>{{emp.Age}}</td>
+                    @*<td ng-blur="updSubscriber(sub,$event)" ng-dblclick="makeEditable($event)">{{sub.Email}}</td>*@
+                    <td>{{emp.Email}}</td>
+                    <td>
+                        <input type="button" id="Delete" value="Delete" data-ng-click="dltEmployee(emp.Id)" />
+                    </td>
+                </tr>
+            </tbody>
+        </table>
+        @*<div class="form-group">
+            <label for="email">Sbscribe here</label>
+            <input type="email" class="form-control" id="email" placeholder="Enter email" [required="string" ] data-ng-model="mailid" />
+        </div>
+        <button type="button" class="btn btn-default" data-ng-click="saveSubs();">Submit</button>*@
+    </div>
+</body>
+<script src="~/Scripts/angular.js"></script>
+<script src="~/Scripts/angular-route.js"></script>
+<script src="~/Scripts/APIScripts/Module.js"></script>
+<script src="~/Scripts/APIScripts/Service.js"></script>
+<script src="~/Scripts/APIScripts/Controller.js"></script>
