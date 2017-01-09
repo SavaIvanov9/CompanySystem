@@ -1,13 +1,15 @@
 ﻿app.controller('APIController', function ($scope, APIService) {
-    getAll();
-    function getAll() {
+    $scope.getAll = function () {
         var servCall = APIService.getEmployees();
         servCall.then(function (d) {
             $scope.employees = d;
         }, function (error) {
-            console.log('Something went wrong while fetching the data.' + error.message.toString());
+            console.log('Something went wrong while fetching the data. ' + error.statusText);
         });
     }
+
+    $scope.getAll();
+
     $scope.saveEmployee = function () {
         var emp = {
             FirstName: $scope.firstName,
@@ -17,33 +19,35 @@
         };
         var saveEmployee = APIService.saveEmployee(emp);
         saveEmployee.then(function (d) {
-            getAll();
+            $scope.getAll();
         },
             function (error) {
-                console.log('Something went wrong while saving the data.');
+                console.log('Something went wrong while saving the data. ' + error.statusText);
             });
     };
+
     $scope.makeEditable = function (obj) {
         obj.target.setAttribute("contenteditable", true);
         obj.target.focus();
     };
-    $scope.updateEmployee = function (employee, eve) {
-        employee.Id = eve.currentTarget.innerText;
+    $scope.updateEmployee = function (emp) {
+        var employee = emp;
         var upd = APIService.updateEmployee(employee);
         upd.then(function (d) {
-            getAll();
+            $scope.getAll();
         },
             function (error) {
                 console.log('Something went wrong while updating the data.');
             });
     };
+
     $scope.deleteEmployee = function (employeeId) {
         var dlt = APIService.deleteEmployee(employeeId);
         dlt.then(function (d) {
-            getAll();
+            $scope.getAll();
         },
             function (error) {
-                console.log('Something went wrong while deleting the data.');
+                console.log('Something went wrong while deleting the data. ' + error.statusText);
             });
     };
 });

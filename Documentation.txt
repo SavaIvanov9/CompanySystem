@@ -1,0 +1,12 @@
+----Connection to database----
+To use database, edit the connection string in App.config file in project CompanySystem.Data
+with your current connection for ms sql server.
+
+current connection string:
+
+<connectionStrings>
+    <add name="CompanySystemDb" connectionString="Data Source=.\sqlexpress;Initial Catalog=CompanySystemDb;Integrated Security=true" providerName="System.Data.SqlClient" />
+</connectionStrings>
+
+----Data for employees----
+Use CompanySystem.Importer to recreate database and seed some new test data.

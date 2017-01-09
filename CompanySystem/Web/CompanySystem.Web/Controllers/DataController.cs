@@ -14,14 +14,13 @@
         }
 
         [HttpGet]
-        [Route("api/employees/alldata")]
         public JsonResult Get()
         {
-            return Json(Data.Employees.All().ToList(), JsonRequestBehavior.AllowGet);
+            var data = Data.Employees.All().ToList();
+            return Json(data, JsonRequestBehavior.AllowGet);
         }
 
         [HttpPost]
-        [Route("api/employees/submitdata")]
         public void Post(Employee employee)
         {
             if (ModelState.IsValid && ValidateIsEmployeeDataCorrect(employee))
@@ -32,7 +31,6 @@
         }
 
         [HttpPut]
-        [Route("api/employees/updatedata")]
         public void Put(Employee employee)
         {
             if (ModelState.IsValid && ValidateIsEmployeeDataCorrect(employee))
@@ -43,7 +41,6 @@
         }
 
         [HttpDelete]
-        [Route("api/employees/deletedata")]
         public void Delete(int id)
         {
             Employee employee = Data.Employees.All().First(e => e.Id == id);
@@ -70,7 +67,7 @@
             {
                 result = false;
             }
-            else if (Validator.EmailIsValid(employee.Email))
+            else if (!Validator.EmailIsValid(employee.Email))
             {
                 result = false;
             }
