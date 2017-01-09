@@ -1,17 +1,19 @@
-﻿
-@{
+﻿@{
     ViewBag.Title = "Welcome";
 }
+
 <style>
     table, tr, td, th {
         border: 1px solid #ccc;
         padding: 10px;
         margin: 10px;
+        font-family: arial, sans-serif;
+    border-collapse: collapse;
     }
 </style>
 
 <h2>Employees:</h2>
-<body data-ng-app="APIModule">
+<body ng-app="APIModule">
     <div id="tblEmployees" ng-controller="APIController">
         <table>
             <tr>
@@ -22,25 +24,36 @@
                 <th>Email</th>
                 <th></th>
             </tr>
-            <tbody data-ng-repeat="emp in employees">
-                <tr>
-                    <td>{{emp.Id}}</td>
-                    <td>{{emp.FirstName}}</td>
-                    <td>{{emp.LastName}}</td>
-                    <td>{{emp.Age}}</td>
-                    @*<td ng-blur="updSubscriber(sub,$event)" ng-dblclick="makeEditable($event)">{{sub.Email}}</td>*@
-                    <td>{{emp.Email}}</td>
-                    <td>
-                        <input type="button" id="Delete" value="Delete" data-ng-click="dltEmployee(emp.Id)" />
-                    </td>
-                </tr>
+            <tbody ng-repeat="emp in employees">
+            <tr>
+                <td>{{emp.Id}}</td>
+                <td>{{emp.FirstName}}</td>
+                <td>{{emp.LastName}}</td>
+                <td>{{emp.Age}}</td>
+                <td ng-blur="updateEmployee(emp,$event)" ng-dblclick="makeEditable($event)">{{emp.Email}}</td>
+                <td>{{emp.Email}}</td>
+                <td>
+                    <input type="button" id="Delete" value="Delete" ng-click="deleteEmployee(emp.Id)" />
+                </td>
+            </tr>
             </tbody>
         </table>
-        @*<div class="form-group">
-            <label for="email">Sbscribe here</label>
-            <input type="email" class="form-control" id="email" placeholder="Enter email" [required="string" ] data-ng-model="mailid" />
+        <br/>
+        <h3>Submit new employee:</h3>
+        <div class="form-group">
+            <label for="FirstName">First Name:</label>
+            <input type="text" class="form-control" id="FirstName" placeholder="Enter first name" [required="string" ] ng-model="firstName" />
+            
+            <label for="LastName">Last Name:</label>
+            <input type="text" class="form-control" id="LastName" placeholder="Enter last name" [required="string" ] ng-model="lastName" />
+            
+            <label for="Age">Age:</label>
+            <input type="number" class="form-control" id="Age" placeholder="Enter age" [required="int" ] ng-model="age" />
+
+            <label for="Email">Email:</label>
+            <input type="email" class="form-control" id="Email" placeholder="Enter email" [required="string" ] ng-model="email" />
         </div>
-        <button type="button" class="btn btn-default" data-ng-click="saveSubs();">Submit</button>*@
+        <button type="button" class="btn btn-default" ng-click="saveEmployee();">Submit</button>
     </div>
 </body>
 <script src="~/Scripts/angular.js"></script>

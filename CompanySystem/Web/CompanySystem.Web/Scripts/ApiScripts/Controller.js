@@ -5,43 +5,45 @@
         servCall.then(function (d) {
             $scope.employees = d;
         }, function (error) {
-            console.log('Oops! Something went wrong while fetching the data.');
+            console.log('Something went wrong while fetching the data.' + error.message.toString());
         });
     }
-    $scope.saveEmployees = function () {
-        var sub = {
-            MailID: $scope.mailid,
-            SubscribedDate: new Date()
+    $scope.saveEmployee = function () {
+        var emp = {
+            FirstName: $scope.firstName,
+            LastName: $scope.lastName,
+            Age: $scope.age,
+            Email: $scope.email
         };
-        var saveEmployees = APIService.saveEmployees(sub);
-        saveEmployees.then(function (d) {
+        var saveEmployee = APIService.saveEmployee(emp);
+        saveEmployee.then(function (d) {
                 getAll();
             },
             function(error) {
-                console.log('Oops! Something went wrong while saving the data.');
+                console.log('Something went wrong while saving the data.');
             });
     };
     $scope.makeEditable = function (obj) {
         obj.target.setAttribute("contenteditable", true);
         obj.target.focus();
     };
-    $scope.updEmployee = function (employee, eve) {
+    $scope.updateEmployee = function (employee, eve) {
         employee.Id = eve.currentTarget.innerText;
-        var upd = APIService.updateSubscriber(employee);
+        var upd = APIService.updateEmployee(employee);
         upd.then(function(d) {
                 getAll();
             },
             function(error) {
-                console.log('Oops! Something went wrong while updating the data.');
+                console.log('Something went wrong while updating the data.');
             });
     };
-    $scope.dltEmployee = function (subID) {
-        var dlt = APIService.deleteEmployee(subID);
+    $scope.deleteEmployee = function (employeeId) {
+        var dlt = APIService.deleteEmployee(employeeId);
         dlt.then(function(d) {
                 getAll();
             },
             function(error) {
-                console.log('Oops! Something went wrong while deleting the data.');
+                console.log('Something went wrong while deleting the data.');
             });
     };
 });

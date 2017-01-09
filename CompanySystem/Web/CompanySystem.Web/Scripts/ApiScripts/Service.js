@@ -1,29 +1,29 @@
 ﻿app.service("APIService", function ($http) {
     this.getEmployees = function () {
-        var url = 'api/Data';
+        var url = 'http://localhost:55075/data/get';
         return $http.get(url).then(function (response) {
             return response.data;
         });
     }
-    this.saveEmployee = function (sub) {
+    this.saveEmployee = function (emp) {
         return $http({
             method: 'post',
-            data: sub,
-            url: 'api/Data'
+            data: emp,
+            url: 'http://localhost:55075/data/post'
         });
     }
-    this.updateEmployee = function (sub) {
+    this.updateEmployee = function (emp) {
         return $http({
             method: 'put',
-            data: sub,
-            url: 'api/Data'
+            data: emp,
+            url: 'http://localhost:55075/data/put'
         });
     }
-    this.deleteEmployee = function (subID) {
-        var url = 'api/Data/' + subID;
+    this.deleteEmployee = function (employeeId) {
+        var url = 'http://localhost:55075/data/delete/' + employeeId;
         return $http({
             method: 'delete',
-            data: subID,
+            data: employeeId,
             url: url
         });
     }
