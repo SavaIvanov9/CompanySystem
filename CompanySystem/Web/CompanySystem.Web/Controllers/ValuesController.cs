@@ -4,11 +4,17 @@ using System.Linq;
 using System.Net;
 using System.Net.Http;
 using System.Web.Http;
+using CompanySystem.Data;
 
 namespace CompanySystem.Web.Controllers
 {
     public class ValuesController : BaseController
     {
+        public ValuesController(ICompanySystemData data) 
+            : base(data)
+        {
+        }
+
         // GET api/values
         public IEnumerable<string> Get()
         {

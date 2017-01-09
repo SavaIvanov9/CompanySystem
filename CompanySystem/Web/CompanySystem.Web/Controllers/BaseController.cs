@@ -1,14 +1,13 @@
 ﻿namespace CompanySystem.Web.Controllers
 {
     using System.Web.Mvc;
-
     using CompanySystem.Data;
 
     public class BaseController : Controller
     {
-        protected BaseController()
+        protected BaseController(ICompanySystemData data)
         {
-            this.Data = new CompanySystemData();
+            this.Data = data;
         }
 
         protected ICompanySystemData Data { get; set; }

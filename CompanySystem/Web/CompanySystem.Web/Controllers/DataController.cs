@@ -1,33 +1,27 @@
-﻿using System;
-using System.Collections.Generic;
-using System.Data.Entity;
-using System.Linq;
-using System.Net;
-using System.Net.Http;
-using System.Web;
-using System.Web.Helpers;
-using System.Web.Http;
-using System.Web.Http.Results;
-using System.Web.Mvc;
-using CompanySystem.Models;
-using CompanySystem.Utilities;
-using Microsoft.Ajax.Utilities;
-using Newtonsoft.Json;
-using Newtonsoft.Json.Linq;
-using Newtonsoft.Json.Serialization;
-
-namespace CompanySystem.Web.Controllers
+﻿namespace CompanySystem.Web.Controllers
 {
+    using System.Linq;
+    using System.Web.Mvc;
+    using CompanySystem.Data;
+    using CompanySystem.Models;
+    using CompanySystem.Utilities;
+
     public class DataController : BaseController
     {
-        [System.Web.Mvc.HttpGet]
-        //[Route("api/campaign/list")]
-        public ActionResult Get()
+        public DataController(ICompanySystemData data) 
+            : base(data)
+        {
+        }
+
+        [HttpGet]
+        [Route("api/employees/alldata")]
+        public JsonResult Get()
         {
             return Json(Data.Employees.All().ToList(), JsonRequestBehavior.AllowGet);
         }
 
-        [System.Web.Mvc.HttpPost]
+        [HttpPost]
+        [Route("api/employees/submitdata")]
         public void Post(Employee employee)
         {
             if (ModelState.IsValid && ValidateIsEmployeeDataCorrect(employee))
@@ -37,7 +31,8 @@ namespace CompanySystem.Web.Controllers
             }
         }
 
-        [System.Web.Mvc.HttpPut]
+        [HttpPut]
+        [Route("api/employees/updatedata")]
         public void Put(Employee employee)
         {
             if (ModelState.IsValid && ValidateIsEmployeeDataCorrect(employee))
@@ -47,7 +42,8 @@ namespace CompanySystem.Web.Controllers
             }
         }
 
-        [System.Web.Mvc.HttpDelete]
+        [HttpDelete]
+        [Route("api/employees/deletedata")]
         public void Delete(int id)
         {
             Employee employee = Data.Employees.All().First(e => e.Id == id);

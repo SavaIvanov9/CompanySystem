@@ -1,22 +1,20 @@
-﻿using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
-using System.Web.Mvc;
-using CompanySystem.Web.Controllers;
-using Microsoft.VisualStudio.TestTools.UnitTesting;
-
-namespace CompanySystem.Web.Tests.Controllers
+﻿namespace CompanySystem.Web.Tests.Controllers
 {
+    using System.Web.Mvc;
+    using CompanySystem.Data;
+    using CompanySystem.Web.Controllers;
+    using Microsoft.VisualStudio.TestTools.UnitTesting;
+    using Moq;
+
     [TestClass]
     public class HomeControllerTest
     {
         [TestMethod]
-        public void Index()
+        public void IndexViewResultShouldNotBeNull()
         {
             // Arrange
-            HomeController controller = new HomeController();
+            var mockedData = new Mock<ICompanySystemData>();
+            HomeController controller = new HomeController(mockedData.Object);
 
             // Act
             ViewResult result = controller.Index() as ViewResult;
