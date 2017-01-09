@@ -10,6 +10,8 @@ using System.Web.Http;
 using System.Web.Http.Results;
 using System.Web.Mvc;
 using CompanySystem.Models;
+using CompanySystem.Utilities;
+using Microsoft.Ajax.Utilities;
 using Newtonsoft.Json;
 using Newtonsoft.Json.Linq;
 using Newtonsoft.Json.Serialization;
@@ -28,7 +30,7 @@ namespace CompanySystem.Web.Controllers
         [System.Web.Mvc.HttpPost]
         public void Post(Employee employee)
         {
-            if (ModelState.IsValid)
+            if (ModelState.IsValid && ValidateIsEmployeeDataCorrect(employee))
             {
                 Data.Employees.Add(employee);
                 Data.SaveChanges();
@@ -38,11 +40,11 @@ namespace CompanySystem.Web.Controllers
         [System.Web.Mvc.HttpPut]
         public void Put(Employee employee)
         {
-            //if (ModelState.IsValid)
-            //{
+            if (ModelState.IsValid && ValidateIsEmployeeDataCorrect(employee))
+            {
                 Data.Employees.Update(employee);
                 Data.SaveChanges();
-            //}
+            }
         }
 
         [System.Web.Mvc.HttpDelete]
@@ -51,12 +53,33 @@ namespace CompanySystem.Web.Controllers
             Employee employee = Data.Employees.All().First(e => e.Id == id);
             if (employee != null)
             {
-                //var employees = Data.Employees.All().ToList();
-                //var employeeToRemove = employees.First(e => e.Id == id);
-                //employees.Remove(employeeToRemove);
                 Data.Employees.Delete(employee);
                 Data.SaveChanges();
             }
+        }
+
+        private bool ValidateIsEmployeeDataCorrect(Employee employee)
+        {
+            bool result = true;
+
+            if (string.IsNullOrEmpty(employee.FirstName))
+            {
+                result = false;
+            }
+            else if (string.IsNullOrEmpty(employee.LastName))
+            {
+                result = false;
+            }
+            else if (employee.Age < 15)
+            {
+                result = false;
+            }
+            else if (Validator.EmailIsValid(employee.Email))
+            {
+                result = false;
+            }
+
+            return result;
         }
     }
 }

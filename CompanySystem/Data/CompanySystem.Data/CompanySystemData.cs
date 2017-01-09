@@ -2,7 +2,6 @@
 {
     using System;
     using System.Collections.Generic;
-
     using CompanySystem.Data.Repositories;
     using CompanySystem.Models;
 

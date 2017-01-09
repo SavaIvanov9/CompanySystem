@@ -4,11 +4,10 @@
 
 <style>
     table, tr, td, th {
-        border: 1px solid #ccc;
+        border: 1px solid #dddddd;
         padding: 10px;
         margin: 10px;
         font-family: arial, sans-serif;
-    border-collapse: collapse;
     }
 </style>
 
@@ -26,34 +25,94 @@
             </tr>
             <tbody ng-repeat="emp in employees">
             <tr>
-                <td>{{emp.Id}}</td>
+                @*<td>{{emp.Id}}</td>
                 <td>{{emp.FirstName}}</td>
                 <td>{{emp.LastName}}</td>
                 <td>{{emp.Age}}</td>
-                <td ng-blur="updateEmployee(emp,$event)" ng-dblclick="makeEditable($event)">{{emp.Email}}</td>
                 <td>{{emp.Email}}</td>
                 <td>
                     <input type="button" id="Delete" value="Delete" ng-click="deleteEmployee(emp.Id)" />
+                </td>*@
+
+                <td>{{emp.Id}}</td>
+                <td ng-blur="updateEmployee(emp,$event)" ng-dblclick="makeEditable($event)">{{emp.FirstName}}</td>
+                <td ng-blur="updateEmployee(emp,$event)" ng-dblclick="makeEditable($event)">{{emp.LastName}}</td>
+                <td ng-blur="updateEmployee(emp,$event)" ng-dblclick="makeEditable($event)">{{emp.Age}}</td>
+                <td ng-blur="updateEmployee(emp,$event)" ng-dblclick="makeEditable($event)">{{emp.Email}}</td>
+                <td>
+                    <input type="button" id="Delete" value="Delete Employee" ng-click="deleteEmployee(emp.Id)" />
                 </td>
             </tr>
             </tbody>
         </table>
-        <br/>
+        <p>*double click on cell to edit*</p>
+
+        <br />
         <h3>Submit new employee:</h3>
         <div class="form-group">
-            <label for="FirstName">First Name:</label>
-            <input type="text" class="form-control" id="FirstName" placeholder="Enter first name" [required="string" ] ng-model="firstName" />
-            
-            <label for="LastName">Last Name:</label>
-            <input type="text" class="form-control" id="LastName" placeholder="Enter last name" [required="string" ] ng-model="lastName" />
-            
-            <label for="Age">Age:</label>
-            <input type="number" class="form-control" id="Age" placeholder="Enter age" [required="int" ] ng-model="age" />
-
-            <label for="Email">Email:</label>
-            <input type="email" class="form-control" id="Email" placeholder="Enter email" [required="string" ] ng-model="email" />
+            <form name="submitForm">
+                <label for="FirstName">First Name:</label>
+                <input name="FirstName" type="text" class="form-control" id="FirstName" placeholder="Enter first name" [required="string" ] ng-model="firstName" required>
+                <div role="alert">
+                    <span class="error" ng-show="submitForm.FirstName.$error.required">
+                        Required!
+                    </span>
+                </div>
+                <br />
+                <label for="LastName">Last Name:</label>
+                <input name="lastName" type="text" class="form-control" id="LastName" placeholder="Enter last name" [required="string" ] ng-model="lastName" required>
+                <div role="alert">
+                    <span class="error" ng-show="submitForm.lastName.$error.required">
+                        Required!
+                    </span>
+                </div>
+                <br/>
+                <label for="Age">Age:</label>
+                <input name="age" type="number" class="form-control" id="Age" placeholder="Enter age" [required="int" ] ng-model="age" required/>
+                <p>*age must be above 14*</p>
+                <div role="alert">
+                    <span class="error" ng-show="submitForm.age.$error.required">
+                        Required!
+                    </span>
+                    <span class="error" ng-show="submitForm.age.$error.number">
+                        Not valid age!
+                    </span>
+                </div>
+                <br />
+                <label for="Email">Email:</label>
+                <input name="email" type="email" class="form-control" id="Email" placeholder="Enter email" [required="string" ] ng-model="email" required>
+                <div role="alert">
+                    <span class="error" ng-show="submitForm.email.$error.required">
+                        Required!
+                    </span>
+                    <span class="error" ng-show="submitForm.email.$error.email">
+                        Not valid email!
+                    </span>
+                </div>
+                <br />
+            </form>
         </div>
         <button type="button" class="btn btn-default" ng-click="saveEmployee();">Submit</button>
+        
+        @*<br />
+        <h3>Edit employee:</h3>
+        <div class="form-group">
+            <label for="Id">ID:</label>
+            <input type="number" class="form-control" id="Id" placeholder="Enter ID" [required="int" ] ng-model="id" />
+
+            <label for="FirstName">First Name:</label>
+            <input type="text" class="form-control" id="FirstName" placeholder="Enter first name" [required="string" ] ng-model="firstName"/>
+
+            <label for="LastName">Last Name:</label>
+            <input type="text" class="form-control" id="LastName" placeholder="Enter last name" [required="string" ] ng-model="lastName"/>
+
+            <label for="Age">Age:</label>
+            <input type="number" class="form-control" id="Age" placeholder="Enter age" [required="int" ] ng-model="age"/>
+
+            <label for="Email">Email:</label>
+            <input type="email" class="form-control" id="Email" placeholder="Enter email" [required="string" ] ng-model="email"/>
+        </div>
+        <button type="button" class="btn btn-default" ng-click="saveEmployee();">Submit</button>*@
     </div>
 </body>
 <script src="~/Scripts/angular.js"></script>

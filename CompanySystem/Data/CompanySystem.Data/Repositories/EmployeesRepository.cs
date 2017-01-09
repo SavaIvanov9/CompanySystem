@@ -1,5 +1,4 @@
-﻿
-namespace CompanySystem.Data.Repositories
+﻿namespace CompanySystem.Data.Repositories
 {
     using CompanySystem.Models;
 

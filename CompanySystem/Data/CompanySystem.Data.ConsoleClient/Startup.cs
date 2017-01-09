@@ -3,13 +3,15 @@ using System.Collections.Generic;
 using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
+using CompanySystem.Models;
 
-namespace CompanySystem.Data.Importer
+namespace CompanySystem.Data.ConsoleClient
 {
-    class Program
+    public class Startup
     {
         static void Main(string[] args)
         {
+            
         }
     }
 }

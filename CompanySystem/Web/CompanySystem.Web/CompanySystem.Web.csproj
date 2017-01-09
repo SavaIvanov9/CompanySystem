@@ -241,6 +241,10 @@
       <Project>{6bbd0dad-89da-43d8-9bf2-f234ad2ef01a}</Project>
       <Name>CompanySystem.Models</Name>
     </ProjectReference>
+    <ProjectReference Include="..\..\Common\CompanySystem.Utilities\CompanySystem.Utilities.csproj">
+      <Project>{c2b6bbd3-d108-4033-9217-05ec220443f7}</Project>
+      <Name>CompanySystem.Utilities</Name>
+    </ProjectReference>
     <ProjectReference Include="..\..\Data\CompanySystem.Data\CompanySystem.Data.csproj">
       <Project>{bfc5edc2-1420-4fca-822d-5f4603c17b22}</Project>
       <Name>CompanySystem.Data</Name>

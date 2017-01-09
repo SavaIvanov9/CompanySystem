@@ -3,7 +3,6 @@
     using System;
     using System.Data.Entity;
     using System.Data.Entity.Infrastructure;
-
     using CompanySystem.Models;
 
     public interface ICompanySystemDbContext : IDisposable

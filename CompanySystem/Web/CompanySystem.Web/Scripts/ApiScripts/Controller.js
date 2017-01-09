@@ -17,9 +17,9 @@
         };
         var saveEmployee = APIService.saveEmployee(emp);
         saveEmployee.then(function (d) {
-                getAll();
-            },
-            function(error) {
+            getAll();
+        },
+            function (error) {
                 console.log('Something went wrong while saving the data.');
             });
     };
@@ -30,19 +30,19 @@
     $scope.updateEmployee = function (employee, eve) {
         employee.Id = eve.currentTarget.innerText;
         var upd = APIService.updateEmployee(employee);
-        upd.then(function(d) {
-                getAll();
-            },
-            function(error) {
+        upd.then(function (d) {
+            getAll();
+        },
+            function (error) {
                 console.log('Something went wrong while updating the data.');
             });
     };
     $scope.deleteEmployee = function (employeeId) {
         var dlt = APIService.deleteEmployee(employeeId);
-        dlt.then(function(d) {
-                getAll();
-            },
-            function(error) {
+        dlt.then(function (d) {
+            getAll();
+        },
+            function (error) {
                 console.log('Something went wrong while deleting the data.');
             });
     };

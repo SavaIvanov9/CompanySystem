@@ -1,7 +1,6 @@
 ﻿namespace CompanySystem.Data
 {
     using System.Data.Entity;
-
     using CompanySystem.Data.Migrations;
     using CompanySystem.Models;
 
